@@ -1,21 +1,25 @@
 {
-    "name": "jaybizzle/hasmeta",
-    "license": "MIT",
-    "description": "Access model meta data as if it was a property on your model",
+    "name": "jlopezcur/metable",
+    "type": "library",
+    "description": "Access model meta data as if it was a property on your model (Fork based on the work of https://github.com/Azirius/hasmeta) for Laravel 5",
     "keywords": ["laravel", "meta", "data", "key", "value"],
+    "homepage": "https://github.com/jlopezcur/metable",
+    "license": "MIT",
     "authors": [
         {
-            "name": "Mark Beech",
-            "email": "mbeech@mark-beech.co.uk"
+            "name": "Javier López Úbeda",
+            "email": "jlopezcur@gmail.com",
+            "homepage": "https://github.com/jlopezcur",
+            "role": "Developer"
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "4.2.*|5.0.*"
+        "php": ">=5.3.0",
+        "illuminate/support": "~5.0",
     },
     "autoload": {
-        "psr-0": {
-            "Jaybizzle\\Hasmeta\\": "src/"
+        "psr-4": {
+            "Jlopezcur\\Metable\\": "src/"
         }
     },
     "minimum-stability": "stable"

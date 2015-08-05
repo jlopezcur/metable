@@ -1,19 +1,17 @@
-HasMeta
+Metable
 =======
 
-A Laravel trait to access model meta data as if it was a property on your model
-
-[![Latest Stable Version](https://poser.pugx.org/jaybizzle/hasmeta/v/stable.svg)](https://packagist.org/packages/jaybizzle/hasmeta) [![Total Downloads](https://poser.pugx.org/jaybizzle/hasmeta/downloads)](https://packagist.org/packages/jaybizzle/hasmeta) [![Latest Unstable Version](https://poser.pugx.org/jaybizzle/hasmeta/v/unstable.svg)](https://packagist.org/packages/jaybizzle/hasmeta) [![License](https://poser.pugx.org/jaybizzle/hasmeta/license.svg)](https://packagist.org/packages/jaybizzle/hasmeta)
+A Laravel trait to access model meta data as if it was a property on your model (Fork based on the work of https://github.com/Azirius/hasmeta) for Laravel 5
 
 Installation
 ============
 
-Run `composer require jaybizzle/hasmeta 0.1.*` or add `"jaybizzle/hasmeta": "0.1.*"` to your `composer.json` file
+Run `composer require jlopezcur/metable 0.1.*` or add `"jlopezcur/metable": "0.1.*"` to your `composer.json` file
 
-In the Model that you want to utilise `HasMeta` add the following properties
+In the Model that you want to utilise `Metable` add the following properties
 
 ```PHP
-	use Jaybizzle\Hasmeta\HasMetaTrait;
+	use Jlopezcur\Metable\MetableTrait;
 
 	protected $meta_model       = 'ModelName'; // the name of your meta data model
 	protected $meta_foreign_key = 'user_id'; // the foreign key of your main model
@@ -27,7 +25,7 @@ Real World Example
 
 Nothing like a simple example to explain things
 
-###Setup
+### Setup
 
 `users` table
 
@@ -71,7 +69,7 @@ Nothing like a simple example to explain things
 ```PHP
 class User extends Eloquent {
 
-	use Jaybizzle\Hasmeta\HasMetaTrait;
+	use Jlopezcur\Metable\MetableTrait;
 
 	protected $meta_model       = 'UserMeta';
 	protected $meta_foreign_key = 'user_id';
@@ -93,7 +91,7 @@ class User extends Eloquent {
 	 * @var string
 	 */
 	protected $primaryKey = 'id';
-	
+
 	// ...
 }
 ```
@@ -120,7 +118,7 @@ class UserMeta extends Eloquent {
 }
 ```
 
-###Usage
+### Usage
 
 Now we can simply do this for getting meta data...
 

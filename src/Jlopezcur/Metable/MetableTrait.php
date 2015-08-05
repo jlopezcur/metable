@@ -1,9 +1,9 @@
-<?php namespace Jaybizzle\Hasmeta;
+<?php namespace Jlopezcur\Metable;
 
-trait HasMetaTrait
+trait MetableTrait
 {
 	protected $metaData = NULL;
-	
+
 	protected function newMeta($meta, $extra = array())
 	{
 		$metaModel = new $this->meta_model();
@@ -110,7 +110,7 @@ trait HasMetaTrait
 		return isset($this->getMeta()->$key->{$this->meta_value_name});
 	}
 
-	public function push() 
+	public function push()
 	{
 		return parent::push() && $this->deleteMeta() && $this->saveMeta();
 	}
@@ -153,19 +153,19 @@ trait HasMetaTrait
 		$primaryKey = $this->primaryKey;
 
 		foreach ((array)$this->getMeta() as $data) {
-			
+
 			if (is_null($data->{$this->meta_foreign_key})) {
 				$data->{$this->meta_foreign_key} = $this->$primaryKey;
 			}
-			
+
 			if(!is_null($data->{$this->meta_value_name}))
 				$data->save();
 		}
-		
+
 		return true;
 	}
 
-	protected function deleteMeta() 
+	protected function deleteMeta()
 	{
 		foreach ((array)$this->getMeta() as $data) {
 			if(is_null($data->{$this->meta_value_name})) {
@@ -173,7 +173,7 @@ trait HasMetaTrait
 				$data->destroy($data->$dataID);
 			}
 		}
-		
+
 		return true;
 	}
 }

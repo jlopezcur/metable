@@ -150,3 +150,17 @@ $user = User::find(1);
 $user->anything_you_want = 'some lovely value';
 $user->save();
 ```
+
+Mass assignment...
+
+```PHP
+$user = User::find(1);
+$user->fill($request->input())->save();
+$user->save();
+```
+
+For mass assignment Remember add in your model...
+
+```PHP
+protected $guarded = array();
+```

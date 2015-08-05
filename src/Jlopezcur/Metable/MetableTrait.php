@@ -11,12 +11,6 @@ trait MetableTrait
 		$metaModel->{$this->meta_value_name} = $meta[$this->meta_value_name];
 		$metaModel->{$this->meta_foreign_key} = $this->{$this->meta_primary_key};
 
-		// if(!empty($extra)) {
-		// 	foreach($extra as $key => $value) {
-
-		// 	}
-		// }
-
 		return $metaModel;
 	}
 
@@ -54,6 +48,30 @@ trait MetableTrait
 		}
 
 		return $value;
+	}
+
+	/**
+     * Fill the model with an array of attributes.
+     *
+     * @param  array  $attributes
+     * @return $this
+     *
+     * @throws \Illuminate\Database\Eloquent\MassAssignmentException
+     */
+	public function fill(array $attributes)
+	{
+		foreach ($this->fillableFromArray($attributes) as $key => $value) {
+			$key = $this->removeTableFromKey($key);
+
+            // The developers may choose to place some attributes in the "fillable"
+            // array, which means only those attributes may be set through mass
+            // assignment to the model, and all others will just be ignored.
+            if ($this->isFillable($key)) {
+                $this->__set($key, $value);
+            }
+		}
+
+		return $this;
 	}
 
 	/**

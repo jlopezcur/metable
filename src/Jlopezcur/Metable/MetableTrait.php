@@ -138,6 +138,40 @@ trait MetableTrait
 		return parent::save() && $this->deleteMeta() && $this->saveMeta();
 	}
 
+	public function getAllWithMeta()
+	{
+		$results = [];
+
+		if (is_null($this->primaryKey)) {
+			// If nothing has been set and there is no ID then there will be no data
+			$results = [];
+		} else {
+			$meta = $this->meta;
+			$niceDataArray = array();
+			foreach ($meta as $data) {
+				$key = $data->{$this->meta_key_name};
+				$value = $this->getAttribute($key);
+				if (is_null($value)) {
+					try {
+						if(isset($this->getMeta()->$key)) {
+							$value = $this->getMeta()->$key->{$this->meta_value_name};
+						} else {
+							$value = NULL;
+						}
+					} catch (Exception $e) {
+						$value = NULL;
+					}
+				}
+				$niceDataArray[$data->{$this->meta_key_name}] = $value;
+			}
+			$results = $niceDataArray;
+
+			// Retrive and overlap model results
+			$results = array_merge($results, $this->attributes);
+		}
+		return $results;
+	}
+
 	/**
 	 * Get the data associated with this model in a usable format
 	 *
